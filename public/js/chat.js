@@ -23,8 +23,6 @@ socket.on('connect', function ()  {
     if (error) {
       alert(error);
       window.location.href = '/';
-    } else {
-      console.log('No error');
     }
   });
 });
@@ -35,8 +33,7 @@ socket.on('disconnect', function ()  {
 
 socket.on('updateUserList', function (users) {
   var ol = $('<ol></ol>');
-  console.log(users);
-  users.forEach(function (user) {
+  users.forEach(function (user) { 
     ol.append($('<li></li>').text(user));
   });
 
@@ -64,7 +61,6 @@ socket.on('newLocationMessage', function (message) {
     from: message.from,
     createdAt: formattedTime
   });
-
   $('#messages').append(html);
   scrollToBottom();
 });
@@ -75,7 +71,6 @@ $('#message-form').on('submit', function (e) {
   var messageTextbox = $('input[name=message');
 
   socket.emit('createMessage', {
-    from: 'User',
     text: messageTextbox.val()
   }, function () {
     messageTextbox.val('');
